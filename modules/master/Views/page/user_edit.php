@@ -1,0 +1,219 @@
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container">
+      <div class="row">
+      <div class="col-12 pt-2">
+         <div class="card round-1">
+         <div class="card-header pr-3">
+            <div class="d-flex justify-content-between">
+              <div>
+              <p class="font-weight-bold text-lg m-0">Edit User</p>
+              </div>
+              <div>
+              <a href="<?=base_url()?>/master/user-lihat<?=(isset($data_diri['id_user']))?  '/'.$data_diri['id_user'] : '' ?>" class="btn btn-primary btn-sm rounded-pill"><i class="fas fa-times"></i></a>
+              </div>
+            </div> 
+            </div>
+            <?php $tipe_user = [ 1 => '<span class="badge bg-indigo">Master</span>', 2 => '<span class="badge badge-danger">Operator</span>',  3 => '<span class="badge badge-info">Penduduk</span>' ]; ?>
+         <div class="card-body">
+         <div class="row">
+          <div class="col-12">
+          <form action="<?=base_url()?>/master/user-update" id="form_user_update" method="post" enctype="multipart/form-data">
+          <input value="<?=(isset($data_diri['id_user']))? $data_diri['id_user'] : '' ?>" name="id_user" type="hidden"  id="id_user">
+            <div class="form-group row">
+                <label for="tipe_user" class="col-lg-4 text-sm text-muted">Tipe User</label>
+                <div class="col-lg-8">
+                  <select name="tipe_user" id="tipe_user" class="form-control bw-2 round-1  <?= (isset($invalid_info['tipe_user'])) ? 'is-invalid' : 'border-primary' ?>" >
+  
+                      <option value="3" <?=(isset($data_diri['tipe_user']) && $data_diri['tipe_user'] == 3)?  'selected' : '' ?>>Penduduk</option>
+                      <option value="2" <?=(isset($data_diri['tipe_user']) && $data_diri['tipe_user'] == 2)?  'selected' : '' ?>>Operator</option>
+                      <option value="1" <?=(isset($data_diri['tipe_user']) && $data_diri['tipe_user'] == 1)?  'selected' : '' ?>>Master</option>
+      
+                  </select>
+                  <span class="invalid-feedback"><?= (isset($invalid_info['tipe_user'])) ? $invalid_info['tipe_user'] : '' ?></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-4">
+                  <button id="tombol_simpan" type="submit" class="btn btn-block btn-success round-1">
+                    SIMPAN<i class="ml-2 fas fa-save"></i>
+                  </button>
+                </div>
+                </div>
+          </form>
+          </div>
+         </div>  
+</div></div>
+<div class="card round-1">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+      <hr>
+            <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">User</span></div>
+            <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['nama_alias'])) ? $data_diri['nama_alias'] : '' ?></p></div></div>
+          <hr>
+            <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Email</span></div>
+            <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['email'])) ? $data_diri['email'] : '' ?></p></div></div>
+          <hr>
+            <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Tipe User</span></div>
+            <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['tipe_user'])) ? $tipe_user[($data_diri['tipe_user'])] : '' ?></p></div></div>
+          <hr>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card round-1">
+  <div class="card-body">
+  <div class="container">
+  <div class="row" id="foto_diri_ktp">
+                  <div class="col-12">
+                  <div class="row">
+                  <div class="col-7 py-2">
+                    <span class="text-sm text-muted">Foto Diri</span>
+                    <p class="text-sm m-0 pr-2">Foto membantu mempersonalisasikan akun</p>
+                  </div>
+                    <div class="col-5 py-2 ">
+                      <div class="float-right">
+                        <?php if(isset($data_diri['link_foto_diri']) && $data_diri['link_foto_diri'] != '') : ?>
+                          <img class="profile-user-img img-fluid" src="<?=base_url()?>/image-content/<?= $data_diri['link_foto_diri'] ?>" alt="User profile picture">
+                        <?php else : ?>
+                          <img class="profile-user-img img-fluid" src="<?=base_url()?>/images/no_picture.png" alt="User profile picture">
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12">
+                  <div class="row">
+                  <div class="col-7 py-2">
+                    <span class="text-sm text-muted">Foto KTP</span>
+                    <p class="text-sm m-0 pr-2">Foto KTP membantu proses verifikasi akun untuk proses pelayanan</p>
+                  </div>
+                    <div class="col-5 py-2">
+                    <div class="float-right">
+                      <?php if(isset($data_diri['link_foto_ktp']) && $data_diri['link_foto_ktp'] != '') : ?>
+                        <img class="profile-user-img img-fluid" src="<?=base_url()?>/image-content/<?= $data_diri['link_foto_ktp'] ?>" alt="User profile picture">
+                      <?php else : ?>
+                        <img class="profile-user-img img-fluid" src="<?=base_url()?>/images/no_picture.png" alt="User profile picture">
+                      <?php endif; ?>
+                    </div>
+                      
+                    </div>
+                  </div>
+                  </div>
+                </div>
+  </div>
+  </div>
+</div>
+<div class="card round-1">
+<div class="card-body">
+
+
+
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">NIK</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['nik'])) ? $data_diri['nik'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Nama</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['nama_lengkap'])) ? $data_diri['nama_lengkap'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Tempat/Tgl Lahir</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['tempat_lahir'])) ? $data_diri['tempat_lahir'] : '' ?> , <?=(isset($data_diri['tanggal_lahir'])) ? date( 'd-m-Y', strtotime($data_diri['tanggal_lahir'])) : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Jenis kelamin</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['jenis_kelamin'])) ? $data_diri['jenis_kelamin'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Gol. Darah</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['gol_darah'])) ? $data_diri['gol_darah'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Agama</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['agama'])) ? $data_diri['agama'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Status Perkawinan</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['status_perkawinan'])) ? $data_diri['status_perkawinan'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Pekerjaan</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['jenis_pekerjaan'])) ? $data_diri['jenis_pekerjaan'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Kewarganegaraan</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['kewarganegaraan'])) ? $data_diri['kewarganegaraan'] : '' ?></p></div></div>
+              </div>
+         </div>
+      <div class="card round-1">
+        <div class="card-body">
+        <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">No. Telepon</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['telepon'])) ? $data_diri['telepon'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Alamat</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['alamat'])) ? $data_diri['alamat'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">RT/RW</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['rt'])) ? $data_diri['rt'] : '0' ?>/<?=(isset($data_diri['rw'])) ? $data_diri['rw'] : '0' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Kel/Desa</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['kel_desa'])) ? $data_diri['kel_desa'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Kecamatan</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['kecamatan'])) ? $data_diri['kecamatan'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Kab/Kota</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['kab_kota'])) ? $data_diri['kab_kota'] : '' ?></p></div></div>
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Provinsi</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['provinsi'])) ? $data_diri['provinsi'] : '' ?></p></div></div>    
+                <hr>
+                <div class="row"><div class="col-lg-4"><span class="text-sm text-muted">Kodepos</span></div>
+                <div class="col-lg-8"><p class="text-md m-0"><?=(isset($data_diri['kode_pos'])) ? $data_diri['kode_pos'] : '' ?></p></div></div>
+                <hr>       
+        </div>
+      </div>
+      </div>
+      </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+<?php if(isset($message_info)) : 
+  $icon_color = ['text-danger', 'text-success' ]; 
+  $icon_symbol = ['fa-times-circle', 'fa-check-circle' ]; 
+?>
+<div class="modal fade" id="modal_message_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content round-1">
+      <div class="modal-header">
+        <div class="modal-title">
+          <h4 class="">
+            <i class="mr-2 fas <?= $icon_symbol[$message_info['status']]?> <?= $icon_color[$message_info['status']]?>"></i>
+            <?= (isset($message_info['status']) && $message_info['status'] == 1) ? 'Berhasil' : 'Gagal' ?>
+          </h4>
+        </div>
+      </div>
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 p-3 text-center">
+              <i class="p-2 mb-2 fa-6x fa-fw far <?= $icon_symbol[$message_info['status']]?> <?= $icon_color[$message_info['status']]?>"></i>
+              <h4 class="font-weight-bold"><?= (isset($message_info['status']) && $message_info['status'] == 1) ? 'Berhasil' : 'Gagal' ?></h4>
+                <p class="text-break"><?= (isset($message_info['text'])) ? $message_info['text'] : '' ?></p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer d-flex">
+        <div class="flex-fill">
+          <div class="row">
+            <div class="col-6">
+              <a href="<?= base_url() ?>/master/user-lihat<?= (isset($data_diri['id_user'])) ? '/'.$data_diri['id_user'] : '' ?>" class="font-weight-bold btn-block btn-primary btn round-1">KEMBALI</a>
+            </div>
+            <div class="col-6">
+              <button type="button" class="font-weight-bold btn-block btn-primary btn round-1" data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
